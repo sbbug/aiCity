@@ -1,0 +1,23 @@
+
+#main{
+background-color:#CAFF70;
+}
+#scroll{
+background-color:red;
+}
+QScrollArea{
+ background-color:#CD2626;
+}
+QVBoxLayout{
+background-color:#BFEFFF;
+}
+QPushButton{
+background-color:#FF00FF;
+}
+#bar{
+background-color:green;
+with:5px;
+}
+#cam_label{
+background-color:green;
+}

@@ -1,0 +1,95 @@
+QWidget
+{
+    background-color:#0e293e;
+    color:#f1f1f1;
+    font-size:12px;
+    border:2px solid #423f48;
+    font: "Tlwg Typo";
+    margin:0px;
+
+}
+
+QMainWindow
+{
+}
+
+QPushButton
+{
+    border:none;
+    width:35px;
+}
+
+QPushButton:hover
+{
+    background-color:#423f48;
+}
+
+QPushButton:pressed
+{
+    background-color:#444444;
+}
+
+QLabel
+{
+    background-color:#2A292B;
+    border:none;
+}
+#main_center{
+    background-color:#0e293e;
+}
+#right_show{
+   border:none;
+}
+#left_show{
+    background-color:#0e293e;
+    border: none;
+}
+#left_show_cameras{
+border: none;
+}
+#bar{
+background-color:#104E8B;
+border-radius: 4px;
+}
+
+#cam_label{
+background-color:black;
+}
+#left_label_show_title{
+    border: none;
+    color: white;
+
+    text-decoration: none;
+    font-size: 25px;
+    border-image:url(./UI/resources/images/show_camera_title.jpg);
+}
+#right_label_show_title{
+    border: none;
+    color: white;
+
+    text-decoration: none;
+    font-size: 25px;
+    border-image:url(./UI/resources/images/show_abnormal_title.png);
+}
+#show_stream_background{
+background-color:#0e293e;
+}
+#button_start{
+background-color:#0e293e;
+}
+#button_stop{
+background-color:#0e293e;
+}
+#show_detect_title{
+background-color:#0e293e;
+}
+#top{
+background-color:#0e293e;
+}
+#abnormal_label{
+background-color:#0e293e;
+}
+#abnormal_label_title{
+background-color:#4F94CD;
+color:white;
+}
