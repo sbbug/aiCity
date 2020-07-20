@@ -295,7 +295,7 @@ NEED_MASKED = [
 
 # per class thresh_score
 CLS_THRESH = {
-    "ExposedTrash": 0.80,
+    "ExposedTrash": 0.90,
     "UoDOFacilities": 0.8,
     "IllegalStand": 0.93,
     "UORoads": 0.8

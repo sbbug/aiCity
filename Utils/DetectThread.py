@@ -10,7 +10,11 @@ from Utils.par import abnormals
 from Camera.FtpServer import FtpServer
 from Parameters import HTTP_CAMERAS
 from Camera.HttpCamera import HttpCamera
-
+from queue import Queue
+import base64
+import asyncio
+import websockets
+import threading
 
 class DetectThread(QThread):
     # revised in 2019.11.21 by mjs: add time.clock()
@@ -28,11 +32,11 @@ class DetectThread(QThread):
         # ftp server info
         self.ftp_server = FtpServer("121.43.182.244", 'ftpuser', 'Lawatlas2018')
         self.ftp_cameras = ["camera_51"]
-        # http server info
-        # self.http_cameras = dict()
 
-        # for camera_id in HTTP_CAMERAS:
-        #     self.http_cameras[camera_id] = HttpCamera(camera_id)
+        self.websocket_queue = Queue()
+
+        self.send_thread = threading.Thread(target=self.run_send_msg_thread)
+        self.send_thread.start()
 
     def run(self):
 
@@ -48,14 +52,6 @@ class DetectThread(QThread):
                     encodeRgbImage = self.detect_frame(img, cam_id)
                     self.slot.emit(encodeRgbImage)
                     time.sleep(0.1)
-
-            # get frame from ftp server
-            # img = self.ftp_server.read()
-            #
-            # if img is not None:
-            #     encodeRgbImage = self.detect_frame(img, self.ftp_cameras[0])
-            #     self.slot.emit(encodeRgbImage)
-            #     time.sleep(0.1)
 
             # get frame from http server
             for key in self.cameras_image.keys():
@@ -104,4 +100,30 @@ class DetectThread(QThread):
 
         encodeRgbImage = rgbImage.tostring()
 
+        rgbImage = cv2.cvtColor(rgbImage,cv2.COLOR_RGB2BGR)
+        img_str = cv2.imencode('.jpg',rgbImage)[1].tostring()
+        self.websocket_queue.put(str(base64.b64encode(img_str),encoding="utf-8"))
+
         return encodeRgbImage
+
+    async def send_msg(self):
+        '''
+        :return:
+        '''
+        url = "ws://221.226.81.54:30009"
+        while True:
+            try:
+                async with websockets.connect(url) as websocket:
+                    while True:
+                        if self.websocket_queue.qsize()==0:
+                            time.sleep(2)
+                        msg = self.websocket_queue.get()
+                        await websocket.send(msg)
+                        print(f'client send message to server {url} successfully')
+                        # time.sleep(10)
+            except Exception as e:
+                print(e)
+                time.sleep(2)
+
+    def run_send_msg_thread(self):
+        asyncio.run(self.send_msg())

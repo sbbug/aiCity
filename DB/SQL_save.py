@@ -14,6 +14,10 @@ def getNum():
     sql = 'select * from NUM_FB'
     ob = SQLI('root', '123456Pa!', 'test')
     res = ob.find(sql)
+
+    if len(res) == 0:
+        return 0
+
     return res[0][0]
 
 
@@ -82,7 +86,7 @@ def dataRefresh():
     return result
 
 def createLogDir():
-    dirpath = '/home/user/code/cityManager/Resources/Log/' + str(time.strftime('%Y-%m-%d', time.localtime()))
+    dirpath = '/home/aicity/code/cityManager/Resources/Log/' + str(time.strftime('%Y-%m-%d', time.localtime()))
     isExists = os.path.exists(dirpath)
     if not isExists:
         os.makedirs(dirpath)

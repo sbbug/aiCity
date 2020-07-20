@@ -13,8 +13,8 @@ class CascadeDetection(object):
     # cascade config
     class CascadeConfig:
 
-        config_file = '/home/user/code/mmdetection/configs/cascade_rcnn/cascade_rcnn_r101_fpn_1x_coco.py'
-        checkpoint_file = '/home/user/code/mmdetection/work_dirs/cascade_rcnn_r101_fpn_1x_coco/epoch_17.pth'
+        config_file = '/home/aicity/code/mmdetection/configs/cascade_rcnn/cascade_rcnn_r50_fpn_1x_coco.py'
+        checkpoint_file = '/home/aicity/code/mmdetection/work_dirs/cascade_rcnn_r50_fpn_1x_coco/epoch_18.pth'
         cuda_device = 'cuda:0'
         classes = (
             'luan_dui_wu_liao',

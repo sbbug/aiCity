@@ -201,7 +201,7 @@ def detectAbnormalForUI(fpnDetection, frame, camID, logger=None, frame_raw_image
         #
         start = time.perf_counter()
         # 对0-10天重复上报的异常进行过滤
-        reportingAbnormals = FinalfilterReportedAbnormal(camID, reportingAbnormals)
+        # reportingAbnormals = FinalfilterReportedAbnormal(camID, reportingAbnormals)
         end = time.perf_counter()
         line = 'FinalfilterReportedAbnormal: the runtime is: ' + str(end - start) + '\n'
         # lines.append(line)

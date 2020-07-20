@@ -1,5 +1,5 @@
-from Execute import control
+import torch
+import mmdet
 
 if __name__ == "__main__":
-    con1 = control('DB/SQL_save.py')
-    con1.run()
+    pass
