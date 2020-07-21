@@ -232,7 +232,6 @@ def detectAbnormalForUI(fpnDetection, frame, camID, logger=None, frame_raw_image
         # lines.append(line)
         if logger is not None:
             logger.info(line)
-        # print(line)
 
         reportingAbnormalSet = []
         # debug
