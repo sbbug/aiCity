@@ -226,7 +226,7 @@ def detectAbnormalForUI(fpnDetection, frame, camID, logger=None, frame_raw_image
         #     Functions.copyDetectImageToReportedDataset(im_path=raw_image_path)
         start = time.perf_counter()
         # 将异常发送到对方系统
-        sendAbnormals(frame, reportingAbnormals, camID, logger,frame_raw_image_path)
+        # sendAbnormals(frame, reportingAbnormals, camID, logger,frame_raw_image_path)
         end = time.perf_counter()
         line = 'sendAbnormals: the runtime is: ' + str(end - start) + '\n'
         # lines.append(line)
