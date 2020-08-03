@@ -67,7 +67,7 @@ class control(object):
         global logger
         flag = False
         print("start")
-        while (True):
+        while True:
             os.system('python {} &'.format(self.__file))
             cmd_run = "ps -aux | grep {}".format(self.__file)
             out = os.popen(cmd_run).read()

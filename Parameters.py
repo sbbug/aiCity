@@ -17,6 +17,9 @@ SERVER_IP = "139.226.172.145"
 
 REPORTED_DATASET_PATH = "Resources/ReportedDataset/images"
 
+FEEDBACK_DATASET_IMAGE = "Resources/FeedbackDataset/image"
+FEEDBACK_DATASET_XML = "Resources/FeedbackDataset/xml"
+
 LOG_REFRESH_FRE = 1800
 
 abnormalMinTimeThreshold = 60  # the abnormal exists for about 10min ,then reported
@@ -300,7 +303,12 @@ CLS_THRESH = {
     "IllegalStand": 0.93,
     "UORoads": 0.8
 }
-
+# CLS_THRESH = {
+#     "ExposedTrash": 0.20,
+#     "UoDOFacilities": 0.3,
+#     "IllegalStand": 0.3,
+#     "UORoads": 0.2
+# }
 
 if __name__ == "__main__":
     # print(VGGLABELS[0])

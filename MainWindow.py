@@ -1,4 +1,4 @@
-#ref:https://doc.qt.io/qt-5/qvboxlayout.html
+c#ref:https://doc.qt.io/qt-5/qvboxlayout.html
 import sys
 from UI.TitleBar import *
 from UI.funcs import LoadStyleFromQss

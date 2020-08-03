@@ -85,7 +85,7 @@ class DetectThread(QThread):
         line = 'detectAbnormalForUI: the runtime is: ' + str(end - start) + '\n'
         # print(line)
         self.logger.info(line)
-        print("---------------", len(reportingAbnormalSet))
+        self.logger.info("---------------{}".format(len(reportingAbnormalSet)))
         for report in reportingAbnormalSet:
             abnormal = dict()
             cls = ''
@@ -99,8 +99,8 @@ class DetectThread(QThread):
                     abnormal[r] = report[r].tostring()
 
                 abnormals.append(abnormal)
-            cv2.imwrite(getProjectContext()+"/Utils/temp.jpg", report[cls])
-            self.run_send_abnormal_thread(getProjectContext()+"/Utils/temp.jpg", abnormal['type'], abnormal['score'])
+            cv2.imwrite(getProjectContext()+"/Utils/temp.jpg", cv2.resize(report[cls],(216,162)))
+            self.run_send_abnormal_thread(getProjectContext()+"/Utils/temp.jpg", cls, abnormal['score'])
 
         # rgbImage = cv2.resize(masked, (628, 417))
         rgbImage = cv2.resize(image_detect_res, (628, 417))
@@ -129,10 +129,10 @@ class DetectThread(QThread):
                             time.sleep(2)
                         msg = self.websocket_queue.get()
                         await websocket.send(msg)
-                        print(f'client send message to server {url} successfully')
+                        self.logger.info('client send message to server {} successfully'.format(url))
                         # time.sleep(10)
             except Exception as e:
-                print(e)
+                self.logger.error(e)
                 time.sleep(2)
 
     def run_send_detect_thread(self):
@@ -154,12 +154,12 @@ class DetectThread(QThread):
         while True:
 
             if n > 3:
-                self.logger("the send-abnormal is timeout")
+                self.logger.info("the send-abnormal is timeout")
                 break
             try:
                 res = requests.post("http://221.226.81.54:30010/", data=json.dumps(abnormal_meta))
                 if res.text == "yes":
-                    self.logger("abnormal send is success")
+                    self.logger.info("abnormal send is success")
                     break
             except:
                 n += 1

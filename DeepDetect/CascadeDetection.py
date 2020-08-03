@@ -14,7 +14,7 @@ class CascadeDetection(object):
     class CascadeConfig:
 
         config_file = '/home/aicity/code/mmdetection/configs/cascade_rcnn/cascade_rcnn_r50_fpn_1x_coco.py'
-        checkpoint_file = '/home/aicity/code/mmdetection/work_dirs/cascade_rcnn_r50_fpn_1x_coco/epoch_18.pth'
+        checkpoint_file = '/home/aicity/code/mmdetection/work_dirs/cascade_rcnn_r50_fpn_1x_coco/epoch_17.pth'
         cuda_device = 'cuda:0'
         classes = (
             'luan_dui_wu_liao',
@@ -28,7 +28,7 @@ class CascadeDetection(object):
             'cheng_san_jing_ying',
             'luan_shai_yi_wu'
         )
-        score_thr = 0.8
+        score_thr = 0.6
 
     def __init__(self):
         # cascade model
@@ -65,7 +65,7 @@ class CascadeDetection(object):
         result = inference_detector(self.model, frame)
 
         bboxes, labels = self.getBoxsAndLabels(result)
-
+        print("++++++++++++++++++++++",bboxes)
         res_info = []
         for bbox, cls in zip(bboxes, labels):
 

@@ -48,7 +48,7 @@ class SQLI(object):
         try:
             sql = 'alter table ' + table
             for column, type in zip(columns, types):
-                sql += ' add column {} {},'.format(column, type)
+                sql += ' add {} {},'.format(column, type)
             sql = sql[0:sql.rfind(',')] + ';'
             res = self.cur.execute(sql)
             self.conn.commit()
@@ -63,9 +63,13 @@ class SQLI(object):
         '''
         try:
             # startTrans()
-            res = self.cur.execute(sql) 
-            # 提交事务
-            self.conn.commit()  
+            res = self.cur.execute(sql)
+            if res==0:
+                print("update fail")
+            else:
+                # 提交事务
+                self.conn.commit()
+                print("update success!")
             return res   # 可以不返回
         except Exception as e:
             print(e)

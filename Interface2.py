@@ -153,18 +153,11 @@ def detectAbnormalForUI(fpnDetection, frame, camID, logger=None, frame_raw_image
     end = time.perf_counter()
     line = 'fpnDetection.detectAbnormalsByMutilScale: the runtime is: ' + str(end - start) + '\n'
     lines.append(line)
-    # print(line)
 
-    # print("abnormals")
     logger.info("abnormals:{}".format(abnormals))
-
-    # print(abnormals)
-
     if len(abnormals) == 0 and (not Parameters.debug):
         logger.info("当前摄像头{}无异常".format(camID))
-
     else:
-
         # 将假异常的图片以及bounding box写入日志
         logWriter(frame, camID, abnormals)
 
@@ -173,10 +166,9 @@ def detectAbnormalForUI(fpnDetection, frame, camID, logger=None, frame_raw_image
         reportAbnormals = alg.findTrueAbnormals(camID, abnormals, frame)
         end = time.perf_counter()
         line = 'alg.findTrueAbnormals: the runtime is: ' + str(end - start) + '\n'
-        # lines.append(line)
+
         if logger is not None:
             logger.info(line)
-        # print(line)
 
         logger.info("reportAbnormals:{}".format(reportAbnormals))
 
@@ -187,10 +179,9 @@ def detectAbnormalForUI(fpnDetection, frame, camID, logger=None, frame_raw_image
         reportingAbnormals = filterReportedAbnormal(camID, reportAbnormals)
         end = time.perf_counter()
         line = 'filterReportedAbnormal: the runtime is: ' + str(end - start) + '\n'
-        # lines.append(line)
+
         if logger is not None:
             logger.info(line)
-        # print(line)
 
         logger.info("reportingAbnormals{}".format(reportingAbnormals))
 
@@ -210,11 +201,11 @@ def detectAbnormalForUI(fpnDetection, frame, camID, logger=None, frame_raw_image
         # #print(line)
 
         # 对隔天重复上报的异常进行过滤
-        logger.info("隔天重复上报的异常进行过滤")
-        start = time.perf_counter()
-        reportingAbnormals = filterYesterdayReportedAbnormalByFeature(camID, reportingAbnormals)
-        end = time.perf_counter()
-        line = 'filterYesterdayReportedAbnormalByFeature: the runtime is: ' + str(end - start) + '\n'
+        # logger.info("隔天重复上报的异常进行过滤")
+        # start = time.perf_counter()
+        # reportingAbnormals = filterYesterdayReportedAbnormalByFeature(camID, reportingAbnormals)
+        # end = time.perf_counter()
+        # line = 'filterYesterdayReportedAbnormalByFeature: the runtime is: ' + str(end - start) + '\n'
         # lines.append(line)
         if logger is not None:
             logger.info(line)
@@ -226,7 +217,7 @@ def detectAbnormalForUI(fpnDetection, frame, camID, logger=None, frame_raw_image
         #     Functions.copyDetectImageToReportedDataset(im_path=raw_image_path)
         start = time.perf_counter()
         # 将异常发送到对方系统
-        # sendAbnormals(frame, reportingAbnormals, camID, logger,frame_raw_image_path)
+        sendAbnormals(frame, reportingAbnormals, camID, logger,frame_raw_image_path)
         end = time.perf_counter()
         line = 'sendAbnormals: the runtime is: ' + str(end - start) + '\n'
         # lines.append(line)
